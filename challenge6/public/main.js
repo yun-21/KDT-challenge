@@ -96,9 +96,6 @@ function checkPassword() {
     pasCheck();
 }
 
-
-
-
 const mailText = document.getElementById("mailText"); //메일 input
 const boolcolor4 = document.createElement("div"); //메일 확인의 boolean의 색깔div
 mailText.appendChild(boolcolor4);
@@ -128,32 +125,41 @@ boolcolor5.style.width = "30px";
 boolcolor5.style.height = "30px";
 boolcolor5.style.backgroundColor = "red"; //폰번호 확인의 boolean을 빨간색으로 초기화
 
-const phNumTextIn = document.querySelector('#phNumTextIn');
+const phNumTextIn = document.querySelector('#phNumTextin');
 
 function checkPhone() {
-    if (phNumTextIn.value) {
+    const nameArr = [];
+    const numArr = [];
+    memberNames.forEach((element) => {
+        nameArr.push(element.name);
+        numArr.push(element.number);
+    })
+    if (nameArr.indexOf(inputValue.value) === numArr.indexOf(phNumTextIn.value)) {
+        boolcolor5.style.backgroundColor = "blue";
         const truer = validationCheck.splice(4, 1, true);
-        return truer;
+        return truer
     }
-    else {
+    else{
+        boolcolor5.style.backgroundColor = "red";
         const falser = validationCheck.splice(4, 1, false);
-        return falser;
+        return falser
     }
 }
+
+const pass = document.getElementById("pass");
 
 // 배열의 모든 값이 true 일 때 실행
 function complateValidation() {
     checkMyName();
     checkPassword();
     checkEmail();
+    checkPhone();
     for (let i = 0; i < validationCheck.length; i++) {
         if (validationCheck.includes(false) === true) {
-            console.log("유효하지 않습니다.");
-            console.log(validationCheck);
+            pass.innerHTML="<b style='background-color:red'>모든 입력란이 유효하지 않습니다.</b>";
         }
         else {
-            console.log(validationCheck);
-            console.log("유효합니다");
+            pass.innerHTML="<b style='background-color:lightblue'>모든 입력란이 유효합니다.</b>";
         }
     }
 }
