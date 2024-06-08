@@ -20,7 +20,7 @@ const memberNames = [
     { name: "최유진", number: "010-8888-8888" },
     { name: "황재민", number: "010-9999-9999" }
 ]
-const validationCheck = [false,false,false,false,false];
+const validationCheck = [false, false, false, false, false];
 
 const nameText = document.getElementById("nameText"); //이름 적을 input
 const boolcolor1 = document.createElement("div"); //이름의 boolean의 색깔div
@@ -28,11 +28,6 @@ nameText.appendChild(boolcolor1);
 boolcolor1.style.width = "30px";
 boolcolor1.style.height = "30px";
 boolcolor1.style.backgroundColor = "red"; //이름의 boolean을 빨간색으로 초기화
-// const nameInput = document.getElementById("nameInput");
-// console.dir(nameInput);
-
-// const btn = document.getElementById('btn');
-const btn = document.getElementsByTagName('button');
 
 const inputValue = document.querySelector('#formf input'); //form아이디인 formf이고 form의 첫input 가져오기
 
@@ -51,8 +46,6 @@ function checkMyName() {
             return falser
         }
     });
-    console.log(memName);
-    console.log(validationCheck)
 }
 
 const passText = document.getElementById("passText"); //비밀번호 input
@@ -63,14 +56,6 @@ boolcolor2.style.height = "30px";
 boolcolor2.style.backgroundColor = "red"; //비밀번호의 boolean을 빨간색으로 초기화
 
 const passwordValue = document.querySelector('#password'); //비밀번호 input을 id로 선택해서 가져옴
-function Password() {
-    for (let i = 0; i < memberNames.length; i++) {
-        if (memberNames[i].name + memberNames[i].number.slice(-4) === passwordValue.value) {
-            boolcolor2.style.backgroundColor = "blue";
-        }
-    }
-    pasCheck();
-}
 
 const passCheck = document.getElementById("passTextCheck");
 const boolcolor3 = document.createElement("div"); //비밀번호 다시 확인의 boolean의 색깔div
@@ -79,13 +64,40 @@ boolcolor3.style.width = "30px";
 boolcolor3.style.height = "30px";
 boolcolor3.style.backgroundColor = "red"; //비밀번호 다시 확인의 boolean을 빨간색으로 초기화
 
-
 const passwordCheck = document.querySelector('#passwordCheck'); //비밀번호 다시 확인 input을 id로 선택해서 가져옴
-function pasCheck() {
-    if (passwordCheck.value === passwordValue.value) {
-        boolcolor3.style.backgroundColor = "blue";
+
+function checkPassword() {
+    const memNamTel = [];
+    memberNames.forEach((element) => {
+        memNamTel.push(element.name + element.number.slice(-4))
+        if (memNamTel.includes(passwordValue.value) === true) {
+            boolcolor2.style.backgroundColor = "blue";
+            const truer = validationCheck.splice(1, 1, true);
+            return truer;
+        }
+        else if (memNamTel.includes(passwordValue.value) === false) {
+            boolcolor2.style.backgroundColor = "red";
+            const falser = validationCheck.splice(1, 1, false)
+            return falser;
+        }
+    })
+    function pasCheck() {
+        if (passwordCheck.value === passwordValue.value) {
+            boolcolor3.style.backgroundColor = "blue";
+            const truer = validationCheck.splice(2, 1, true);
+            return truer;
+        }
+        else{
+            boolcolor3.style.backgroundColor = "red";
+            const truer = validationCheck.splice(2, 1, false);
+            return truer;
+        }
     }
+    pasCheck();
 }
+
+
+
 
 const mailText = document.getElementById("mailText");
 const boolcolor4 = document.createElement("div"); //비밀번호 다시 확인의 boolean의 색깔div
@@ -101,6 +113,9 @@ function mailFunc() {
             if (mailTextIn.value[i] === '@' && mailTextIn.value[j] === '.') {
                 boolcolor4.style.backgroundColor = "blue";
             }
+            else{                
+                boolcolor4.style.backgroundColor = "red";
+            }
     }
 }
 
@@ -108,6 +123,8 @@ function mailFunc() {
 // 배열의 모든 값이 true 일 때 실행
 function complateValidation() {
     checkMyName();
+    checkPassword();
+    mailFunc();
     for (let i = 0; i < validationCheck.length; i++) {
         if (validationCheck.includes(false) === true) {
             console.log("유효하지 않습니다.");
@@ -118,14 +135,7 @@ function complateValidation() {
     }
 }
 
-// function checkPassword(fromInputdata){
-// 	if(condition) {
-// 		return true;
-// 	}
-// 	else{
-// 		return false;
-// 	}
-// }
+
 
 // function checkEmail(fromInputdata){
 // 	if(condition){
