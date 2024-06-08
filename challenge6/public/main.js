@@ -87,7 +87,7 @@ function checkPassword() {
             const truer = validationCheck.splice(2, 1, true);
             return truer;
         }
-        else{
+        else {
             boolcolor3.style.backgroundColor = "red";
             const truer = validationCheck.splice(2, 1, false);
             return truer;
@@ -108,14 +108,16 @@ boolcolor4.style.backgroundColor = "red"; //비밀번호 다시 확인의 boolea
 
 const mailTextIn = document.querySelector('#mailTextin');
 function mailFunc() {
-    for (let i = 0; i < mailTextIn.value.length; i++) {
-        for (let j = 0; j < mailTextIn.value.length; j++)
-            if (mailTextIn.value[i] === '@' && mailTextIn.value[j] === '.') {
-                boolcolor4.style.backgroundColor = "blue";
-            }
-            else{                
-                boolcolor4.style.backgroundColor = "red";
-            }
+    const str = mailTextIn.value;
+    if (str.indexOf('@') < str.indexOf('.') && str.includes('@') && str.includes('.')) {
+        boolcolor4.style.backgroundColor = "blue";
+        const turer = validationCheck.splice(3, 1, true);
+        return turer
+    }
+    else {
+        boolcolor4.style.backgroundColor = "red"
+        const falser = validationCheck.splice(3, 1, false);
+        return falser
     }
 }
 
@@ -128,8 +130,10 @@ function complateValidation() {
     for (let i = 0; i < validationCheck.length; i++) {
         if (validationCheck.includes(false) === true) {
             console.log("유효하지 않습니다.");
+            console.log(validationCheck);
         }
         else {
+            console.log(validationCheck);
             console.log("유효합니다");
         }
     }
