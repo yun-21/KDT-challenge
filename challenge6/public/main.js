@@ -89,8 +89,8 @@ function checkPassword() {
         }
         else {
             boolcolor3.style.backgroundColor = "red";
-            const truer = validationCheck.splice(2, 1, false);
-            return truer;
+            const falser = validationCheck.splice(2, 1, false);
+            return falser;
         }
     }
     pasCheck();
@@ -99,20 +99,20 @@ function checkPassword() {
 
 
 
-const mailText = document.getElementById("mailText");
-const boolcolor4 = document.createElement("div"); //비밀번호 다시 확인의 boolean의 색깔div
+const mailText = document.getElementById("mailText"); //메일 input
+const boolcolor4 = document.createElement("div"); //메일 확인의 boolean의 색깔div
 mailText.appendChild(boolcolor4);
 boolcolor4.style.width = "30px";
 boolcolor4.style.height = "30px";
-boolcolor4.style.backgroundColor = "red"; //비밀번호 다시 확인의 boolean을 빨간색으로 초기화
+boolcolor4.style.backgroundColor = "red"; //메일 확인의 boolean을 빨간색으로 초기화
 
 const mailTextIn = document.querySelector('#mailTextin');
-function mailFunc() {
+function checkEmail() {
     const str = mailTextIn.value;
     if (str.indexOf('@') < str.indexOf('.') && str.includes('@') && str.includes('.')) {
         boolcolor4.style.backgroundColor = "blue";
-        const turer = validationCheck.splice(3, 1, true);
-        return turer
+        const truer = validationCheck.splice(3, 1, true);
+        return truer
     }
     else {
         boolcolor4.style.backgroundColor = "red"
@@ -121,12 +121,31 @@ function mailFunc() {
     }
 }
 
+const phNumText = document.getElementById("phNumText"); //폰번호 input
+const boolcolor5 = document.createElement("div"); //폰번호 확인의 boolean의 색깔 div
+phNumText.appendChild(boolcolor5);
+boolcolor5.style.width = "30px";
+boolcolor5.style.height = "30px";
+boolcolor5.style.backgroundColor = "red"; //폰번호 확인의 boolean을 빨간색으로 초기화
+
+const phNumTextIn = document.querySelector('#phNumTextIn');
+
+function checkPhone() {
+    if (phNumTextIn.value) {
+        const truer = validationCheck.splice(4, 1, true);
+        return truer;
+    }
+    else {
+        const falser = validationCheck.splice(4, 1, false);
+        return falser;
+    }
+}
 
 // 배열의 모든 값이 true 일 때 실행
 function complateValidation() {
     checkMyName();
     checkPassword();
-    mailFunc();
+    checkEmail();
     for (let i = 0; i < validationCheck.length; i++) {
         if (validationCheck.includes(false) === true) {
             console.log("유효하지 않습니다.");
@@ -138,23 +157,3 @@ function complateValidation() {
         }
     }
 }
-
-
-
-// function checkEmail(fromInputdata){
-// 	if(condition){
-// 		return true;
-// 	}
-// 	else{
-// 		return false;
-// 	}
-// }
-
-// function checkPhone(fromInputdata){
-// 	if(condition){
-// 		return true;
-// 	}
-// 	else{
-// 		return false;
-// 	}
-// }
