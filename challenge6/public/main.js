@@ -20,8 +20,7 @@ const memberNames = [
     { name: "최유진", number: "010-8888-8888" },
     { name: "황재민", number: "010-9999-9999" }
 ]
-
-const validationCheck = [false ,false,false,false,false];
+const validationCheck = [false, false, false, false, false];
 
 const nameText = document.getElementById("nameText"); //이름 적을 input
 const boolcolor1 = document.createElement("div"); //이름의 boolean의 색깔div
@@ -37,29 +36,21 @@ const btn = document.getElementsByTagName('button');
 
 const inputValue = document.querySelector('#formf input'); //form아이디인 formf이고 form의 첫input 가져오기
 
-// function btnClic() {
-//     for (let i = 0; i < memberNames.length; i++) {
-//         if (memberNames[i].name === inputValue.value) { //배열의 이름안에 input에 적은 내용과 같다면 실행해라
-//             boolcolor1.style.background = "blue";
-//         }
-//     }
-// }
-
 function checkMyName() {
-    for (let i = 0; i < memberNames.length; i++) {
-        if (memberNames[i].name === inputValue.value) {
-            //배열의 이름안에 input에 적은 내용과 같다면 실행해라
-            const turer = validationCheck.splice(0,1,true)
-            return turer
-        }
-        else {
-            const falser = validationCheck.splice(0,1,false)
-            return falser
-        }
+    const memname = memberNames.name;
+    const inputname = inputValue.value;
+    if (memname.includes(inputname) === true) {
+        boolcolor1.style.backgroundColor = "blue";
+        const turer = validationCheck.splice(0, 1, true);
+        return turer
+    }
+    else if(memname.includes(inputname) === false){
+        const falser = validationCheck.splice(0, 1, false)
+        return falser
     }
 }
-checkMyName()
-console.log(validationCheck)
+
+console.log(validationCheck);
 
 const passText = document.getElementById("passText"); //비밀번호 input
 const boolcolor2 = document.createElement("div"); //비밀번호의 boolean의 색깔div
@@ -126,7 +117,7 @@ function complateValidation(array) {
     }
 }
 
-btn[0].addEventListener('click',complateValidation(validationCheck));
+btn[0].addEventListener('click', checkMyName());
 
 
 // function Halo(){
