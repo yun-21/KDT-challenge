@@ -20,8 +20,7 @@ const memberNames = [
     { name: "최유진", number: "010-8888-8888" },
     { name: "황재민", number: "010-9999-9999" }
 ]
-
-const validationCheck = [false ,false,false,false,false];
+const validationCheck = [false,false,false,false,false];
 
 const nameText = document.getElementById("nameText"); //이름 적을 input
 const boolcolor1 = document.createElement("div"); //이름의 boolean의 색깔div
@@ -37,29 +36,24 @@ const btn = document.getElementsByTagName('button');
 
 const inputValue = document.querySelector('#formf input'); //form아이디인 formf이고 form의 첫input 가져오기
 
-// function btnClic() {
-//     for (let i = 0; i < memberNames.length; i++) {
-//         if (memberNames[i].name === inputValue.value) { //배열의 이름안에 input에 적은 내용과 같다면 실행해라
-//             boolcolor1.style.background = "blue";
-//         }
-//     }
-// }
-
 function checkMyName() {
-    for (let i = 0; i < memberNames.length; i++) {
-        if (memberNames[i].name === inputValue.value) {
-            //배열의 이름안에 input에 적은 내용과 같다면 실행해라
-            const turer = validationCheck.splice(0,1,true)
-            return turer
+    const memName = [];
+    memberNames.forEach((element) => {
+        memName.push(element.name);
+        if (memName.includes(inputValue.value) === true) {
+            boolcolor1.style.backgroundColor = "blue";
+            const truer = validationCheck.splice(0, 1, true);
+            return truer
         }
-        else {
-            const falser = validationCheck.splice(0,1,false)
+        else if (memName.includes(inputValue.value) === false) {
+            boolcolor1.style.backgroundColor = "red";
+            const falser = validationCheck.splice(0, 1, false)
             return falser
         }
-    }
+    });
+    console.log(memName);
+    console.log(validationCheck)
 }
-checkMyName()
-console.log(validationCheck)
 
 const passText = document.getElementById("passText"); //비밀번호 input
 const boolcolor2 = document.createElement("div"); //비밀번호의 boolean의 색깔div
@@ -112,58 +106,17 @@ function mailFunc() {
 
 
 // 배열의 모든 값이 true 일 때 실행
-function complateValidation(array) {
-    for (let i = 0; i < array.length; i++) {
-        if (array.includes(false) === true) {
+function complateValidation() {
+    checkMyName();
+    for (let i = 0; i < validationCheck.length; i++) {
+        if (validationCheck.includes(false) === true) {
             console.log("유효하지 않습니다.");
         }
         else {
-            boolcolor1.style.backgroundColor = "blue";
-            boolcolor2.style.backgroundColor = "blue";
-            boolcolor3.style.backgroundColor = "blue";
-            boolcolor4.style.backgroundColor = "blue";
+            console.log("유효합니다");
         }
     }
 }
-
-btn[0].addEventListener('click',complateValidation(validationCheck));
-
-
-// function Halo(){
-// 	var inputValue = document.getElementById('nameInput');
-// 	if(inputValue.value !== null){
-// 		console.log(inputValue);
-// 	}
-// 	else{
-// 		console.log("안돼");
-// 	}
-// }
-
-// btn.addEventListener('click', function () {
-// 	var inputValue = document.getElementById('nameInput').value;
-// 		if(inputValue !== null){
-// 			console.log(inputValue);
-// 		}
-// 		else{
-// 			console.log("안돼");
-// 		}
-// });
-
-
-// btn.addEventListener('click', function () {
-// 	for (let i = 0; i < memberNames.length; i++) {
-// 		if (memberNames[i] === nameInput.value) {
-// 			boolcolor.style.backgroundColor = "blue";
-// 		}
-// 		else{
-// 			boolcolor.style.backgroundColor = "black";
-// 		}
-// 	}
-// });
-
-//! --------------------------------------------------------
-
-
 
 // function checkPassword(fromInputdata){
 // 	if(condition) {
