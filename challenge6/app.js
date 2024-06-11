@@ -41,11 +41,14 @@ const servers = http.createServer((request, response) => {
                 //post 변수에 post 방식으로 들어온 정보가 들어감
                 const post = qs.parse(body);
                 const title = post.title;
-                const pwd = post.pwd;
+                const email =post.email;
                 const phone = post.phone;
-                console.log(title);
-                console.log(pwd);
-                console.log(phone);
+                const jsonData = {
+                    name : title,
+                    email : email,
+                    phone : phone
+                };
+                fs.writeFileSync("./public/jsonData.json",JSON.stringify(jsonData,null,2))
             });
         }
     }
