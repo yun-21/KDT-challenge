@@ -31,7 +31,7 @@ const servers = http.createServer((request, response) => {
     else if (request.method === "POST") {
         if (request.url.startsWith("/name")) {
             response.statusCode = 200;
-            response.setHeader('Content-Type', 'text/javascript');
+            response.setHeader('Content-Type', 'text/html; charset=utf-8');
             var body = '';
             request.on('data', function (data) {
                 //request로 들어온 정보를 조각조각 잘라서 data라는 인자를 통해서 수신
@@ -39,16 +39,32 @@ const servers = http.createServer((request, response) => {
             });
             request.on('end', function () {  //정보가 조각조각 들어오다가 끝나면 이 함수 호출하도록 약속
                 //post 변수에 post 방식으로 들어온 정보가 들어감
-                const post = qs.parse(body);
-                const title = post.title;
-                const email =post.email;
-                const phone = post.phone;
+                const str = new URLSearchParams(body);
+                const title = str.get("title");
+                const email = str.get("email");
+                const phone = str.get("phone");
                 const jsonData = {
-                    name : title,
-                    email : email,
-                    phone : phone
+                    name: title,
+                    email: email,
+                    phone: phone
                 };
-                fs.writeFileSync("./public/jsonData.json",JSON.stringify(jsonData,null,2))
+                // fs.writeFileSync("./public/jsonData.json", JSON.stringify(jsonData, null, 2));
+                const component = (tagName, inText) => {
+                    return `<${tagName}>${inText}</${tagName}>`
+                }
+                const app = () =>{
+                    function inFunc(){
+                        const arr=[];
+                        for(let key in jsonData){
+                            arr.push(jsonData[key]);
+                        }
+                        return component('h1',arr)
+                    }
+                    return inFunc()
+                }
+                const htmlData = app()
+                response.write(htmlData);
+                response.end();
             });
         }
     }
