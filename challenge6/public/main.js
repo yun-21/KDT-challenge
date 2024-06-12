@@ -1,25 +1,3 @@
-const memberNames = [
-    "구하림",
-    "김보미",
-    "김수현",
-    "김정수",
-    "문혜림",
-    "배성빈",
-    "백지원",
-    "송이현",
-    "신지윤",
-    "유으뜸",
-    "유호영",
-    "이연승",
-    "이재영",
-    "이종수",
-    "임유진",
-    "정호연",
-    "조우식",
-    "조자연",
-    "최유진",
-    "황재민"
-];
 const validationCheck = [false, false, false, false, false];
 
 const nameText = document.getElementById("nameText"); //이름 적을 input
@@ -119,34 +97,33 @@ boolcolor3.style.backgroundColor = "red"; //비밀번호 다시 확인의 boolea
 const passwordCheck = document.querySelector('#passwordCheck'); //비밀번호 다시 확인 input을 id로 선택해서 가져옴
 
 function checkPassword() {
-    const phnum = phNumTextIn.value.split('').slice(-4)
+    pasCheck()
+    const phnum = phNumTextIn.value.split('').slice(-4);
     const nam = [];
     memberNames.forEach((element) => {
         nam.push(element + phnum.join(''));
-        console.log(passwordValue.value.startsWith(inputValue.value))
-        if (nam.includes(passwordValue.value) === true && passwordValue.value.startsWith(inputValue.value)) {
-            boolcolor2.style.backgroundColor = "blue";
-            const truer = validationCheck.splice(1, 1, true);
+    });
+    if (nam.includes(passwordValue.value) === true && passwordValue.value.startsWith(inputValue.value) === true && inputValue.value !== '') {
+        boolcolor2.style.backgroundColor = "blue";
+        const truer = validationCheck.splice(1, 1, true);
+        return truer;
+    } else {
+        boolcolor2.style.backgroundColor = "red";
+        const falser = validationCheck.splice(1, 1, false);
+        return falser;
+    }
+    function pasCheck() {
+        if (passwordValue.value === passwordCheck.value && passwordCheck.value !== '') {
+            boolcolor3.style.backgroundColor = "blue";
+            const truer = validationCheck.splice(2, 1, true);
             return truer;
-        } else {
-            boolcolor2.style.backgroundColor = "red";
-            const falser = validationCheck.splice(1, 1, false);
+        }
+        else {
+            boolcolor3.style.backgroundColor = "red";
+            const falser = validationCheck.splice(2, 1, false);
             return falser;
         }
-    })
-    function pasCheck() {
-                if (passwordCheck.value === passwordValue.value) {
-                    boolcolor3.style.backgroundColor = "blue";
-                    const truer = validationCheck.splice(2, 1, true);
-                    return truer;
-                }
-                else {
-                    boolcolor3.style.backgroundColor = "red";
-                    const falser = validationCheck.splice(2, 1, false);
-                    return falser;
-                }
-            }
-            pasCheck();
+    }
 }
 
 
@@ -158,7 +135,6 @@ function complateValidation() {
     checkPassword();
     checkEmail();
     checkPhone();
-    console.log(validationCheck)
     for (let i = 0; i < validationCheck.length; i++) {
         if (validationCheck.includes(false) === true) {
             pass.innerHTML = "<b style='background-color:red'>모든 입력란이 유효하지 않습니다.</b>";
