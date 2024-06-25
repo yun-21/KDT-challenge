@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div id="root">
+        <div>
+            <form action="/name" id="formf" method="post">
+                <div>
+                    <div>나의 이름</div>
+                    <div id="nameText">
+                        <input type="text" name="title" id="nameinput" placeholder="나의 이름을 작성하세요.">
+                    </div>
+                </div>
+                <div>
+                    <div>비밀번호</div>
+                    <div id="passText">
+                        <input type="text" id="password" placeholder="정자이름과 핸드폰 뒷자리 4자리를 작성해주세요. ex) 신지윤6729">
+                    </div>
+                </div>
+                <div>
+                    <div>비밀번호 확인</div>
+                    <div id="passTextCheck">
+                        <input type="text" id="passwordCheck" placeholder="위 비밀번호 입력과 동일하게 다시한번 작성해주세요.">
+                    </div>
+                </div>
+                <div>
+                    <div>이메일 주소</div>
+                    <div id="mailText">
+                        <input type="text" id="mailTextin" placeholder="이메일의 주소 양식에 맞게 작성해주세요.">
+                    </div>
+                </div>
+                <div>
+                    <div>핸드폰 번호</div>
+                    <div id="nameText">
+                        <input type="text" placeholder="010-xxxx-xxxx 양식에 맞게 작성해주세요.">
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" id="btn" onclick="btnClic()">작성 완료</button>
+                    <!-- <input type="button" value="선택" onclick="Halo()"> -->
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
