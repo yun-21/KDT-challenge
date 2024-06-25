@@ -1,6 +1,10 @@
 const validationCheck = [false, false, false, false, false];
 
-const nameText = document.getElementById("nameText"); //이름 적을 input
+function getElementById(id){
+    id = document.getElementById(id);
+}
+
+// const nameText = document.getElementById("nameText"); //이름 적을 input
 const boolcolor1 = document.createElement("div"); //이름의 boolean의 색깔div
 nameText.appendChild(boolcolor1);
 boolcolor1.style.width = "30px";
